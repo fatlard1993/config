@@ -2,46 +2,70 @@ const fs = require('fs');
 const path = require('path');
 
 const log = require('log');
+const findRoot = require('find-root');
 
-const config = module.exports = {
-	load: function(settings, error, done){
-		config.default = settings.default || {};
+const rootFolder = findRoot(process.cwd());
 
-		config.path = path.join(settings.path || __dirname, 'config.json');
+class Config {
+  constructor(configPath = path.join(rootFolder, 'config.json'), defaults = {}){
+		this.path = configPath;
+		this.defaults = defaults;
 
-		fs.readFile(config.path, function(err, data){
-			if(err && err.code === 'ENOENT') log(`No config file available at ${config.path}`);
+		this.load();
+	}
 
-			else if(err) log.warn('Error reading config file', err);
+	load(){
+		try{
+			var fileContents = fs.readFileSync(this.path);
 
-			try{ config.loaded = JSON.parse(data); }
+			this.current = JSON.parse(fileContents);
 
-			catch(e){
-				log('Failed to parse config .. Replacing with default');
-				log.error(2)(e);
+			this.fillDefaults();
+		}
 
-				config.loaded = config.default;
-			}
+		catch(err){
+			log('Failed to parse config .. Replacing with defaults');
+			log.error(err.code === 'ENOENT' ? 2 : 0)(err);
 
-			log(1)(`Loaded config ${settings.path}`);
-			log(2)(config.loaded);
+			this.current = this.defaults;
 
-			if(done) done(config.loaded);
-		});
-	},
-	save: function(config, error, done){
-		if(!config) return error({ detail: 'Missing config' });
-		if(!config.path) return error({ detail: 'Missing config path' });
+			this.save();
+		}
 
+		log(1)(`Loaded config ${this.path}`);
+		log(2)(this.current);
+	}
+
+	save(config = this.current){
 		config = JSON.stringify(config, null, '  ', 2);
 
-		fs.writeFile(config.path, config, function(err){
-			if(err) return error({ err: err, detail: 'Error writing to config' });
+		try{
+			fs.writeFileSync(this.path, config);
 
-			log(1)(`Saved config ${config.path}`);
+			log(1)(`Saved config ${this.path}`);
 			log(2)(config);
+		}
 
-			if(done) done(config);
-		});
+		catch(err){
+			log.error('Failed to save config', err);
+		}
 	}
-};
+
+	fillDefaults(){
+		var defaultKeys = Object.keys(this.defaults), changed;
+
+		for(var x = 0, count = defaultKeys.length, key; x < count; ++x){
+			key = defaultKeys[x];
+
+			if(typeof this.current[key] === 'undefined'){
+				this.current[key] = this.defaults[key];
+
+				changed = true;
+			}
+		}
+
+		if(changed) this.save();
+	}
+}
+
+module.exports = Config;
