@@ -6,8 +6,8 @@ const findRoot = require('find-root');
 
 const rootFolder = findRoot(process.cwd());
 
-class Config {
-  constructor(configPath = path.join(rootFolder, 'config.json'), defaults = {}){
+class ConfigManager {
+	constructor(configPath = path.join(rootFolder, 'config.json'), defaults = {}){
 		this.path = configPath;
 		this.defaults = defaults;
 
@@ -37,7 +37,7 @@ class Config {
 	}
 
 	save(config = this.current){
-		config = JSON.stringify(config, null, '  ', 2);
+		config = JSON.stringify(config, null, '	', 2);
 
 		try{
 			fs.writeFileSync(this.path, config);
@@ -68,4 +68,4 @@ class Config {
 	}
 }
 
-module.exports = Config;
+module.exports = ConfigManager;
