@@ -1,27 +1,31 @@
 {
-  "name": "config",
-  "version": "1.0.0",
-  "description": "A simple config file manager for node.js",
-  "main": "src/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fatlard1993/config.git"
-  },
-  "author": "fatlard1993",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/fatlard1993/config/issues"
-  },
-  "homepage": "https://github.com/fatlard1993/config#readme",
-  "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.14.1"
-  },
-  "dependencies": {
-    "find-root": "^1.1.0",
-    "log": "github:fatlard1993/log"
-  }
+	"name": "config",
+	"version": "1.0.0",
+	"description": "A simple config file manager for node.js",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/fatlard1993/config.git"
+	},
+	"author": "fatlard1993",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/fatlard1993/config/issues"
+	},
+	"homepage": "https://github.com/fatlard1993/config#readme",
+	"dependencies": {
+		"find-root": "^1.1.0",
+		"log": "github:fatlard1993/log"
+	},
+	"eslintConfig": {
+		"extends": "rules"
+	},
+	"devDependencies": {
+		"babel-eslint": "^10.0.1",
+		"eslint": "^5.15.1",
+		"eslint-config-rules": "github:fatlard1993/eslint-config-rules"
+	}
 }
