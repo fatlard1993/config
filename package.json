@@ -1,5 +1,5 @@
 {
-	"name": "config",
+	"name": "config-manager",
 	"version": "1.0.0",
 	"description": "A simple config file manager for node.js",
 	"main": "src/index.js",
