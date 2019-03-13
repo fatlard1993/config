@@ -6,7 +6,7 @@ const findRoot = require('find-root');
 
 const rootFolder = findRoot(process.cwd());
 
-class ConfigManager {
+class Config {
 	constructor(configPath = path.join(rootFolder, 'config.json'), defaults = {}){
 		this.path = configPath;
 		this.defaults = defaults;
@@ -68,4 +68,4 @@ class ConfigManager {
 	}
 }
 
-module.exports = ConfigManager;
+module.exports = Config;
