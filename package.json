@@ -17,15 +17,17 @@
 	},
 	"homepage": "https://github.com/fatlard1993/config#readme",
 	"dependencies": {
-		"find-root": "^1.1.0",
-		"log": "github:fatlard1993/log"
+		"find-root": "^1.1.0"
 	},
 	"eslintConfig": {
 		"extends": "rules"
 	},
 	"devDependencies": {
-		"babel-eslint": "^10.0.1",
-		"eslint": "^5.15.1",
 		"eslint-config-rules": "github:fatlard1993/eslint-config-rules"
+	},
+	"peerDependencies": {
+		"babel-eslint": ">= 10",
+		"eslint": ">= 5",
+		"log": "github:fatlard1993/log"
 	}
 }
