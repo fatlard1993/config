@@ -2,12 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 const log = require('log');
-const findRoot = require('find-root');
-
-const rootFolder = findRoot(process.cwd());
 
 class Config {
-	constructor(configPath = path.join(rootFolder, 'config.json'), defaults = {}){
+	constructor(configPath = path.join(process.cwd(), 'config.json'), defaults = {}){
 		this.path = configPath;
 		this.defaults = defaults;
 
