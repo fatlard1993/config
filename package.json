@@ -16,9 +16,6 @@
 		"url": "https://github.com/fatlard1993/config/issues"
 	},
 	"homepage": "https://github.com/fatlard1993/config#readme",
-	"dependencies": {
-		"log": "github:fatlard1993/log#2.x.x"
-	},
 	"eslintConfig": {
 		"extends": "rules"
 	},
@@ -26,5 +23,9 @@
 		"eslint-config-rules": "github:fatlard1993/eslint-config-rules#2.x.x",
 		"babel-eslint": "^10.0.1",
 		"eslint": "^5.15.3"
+	},
+	"dependencies": {
+		"find-root": "^1.1.0",
+		"log": "github:fatlard1993/log#2.x.x"
 	}
 }
