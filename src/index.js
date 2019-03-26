@@ -39,7 +39,7 @@ class Config {
 		try{
 			fs.writeFileSync(this.path, config);
 
-			log(1)(`Saved config ${this.path}`);
+			log()(`Saved config ${this.path}`);
 			log(2)(config);
 		}
 
