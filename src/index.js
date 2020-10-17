@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const log = require('log');
+const log = new (require('log'))({ tag: 'config-manager' });
 
 class Config {
 	constructor(configPath = path.join(process.cwd(), 'config.json'), defaults = {}){
@@ -21,7 +21,7 @@ class Config {
 		}
 
 		catch(err){
-			log('[config-manager] Failed to parse config .. Replacing with defaults');
+			log('Failed to parse config .. Replacing with defaults');
 			log.error(err.code === 'ENOENT' ? 2 : 0)(err);
 
 			this.current = this.defaults;
@@ -29,7 +29,7 @@ class Config {
 			this.save();
 		}
 
-		log(1)(`[config-manager] Loaded config ${this.path}`);
+		log(1)(`Loaded config ${this.path}`);
 		log(2)(this.current);
 	}
 
@@ -39,12 +39,12 @@ class Config {
 		try{
 			fs.writeFileSync(this.path, config);
 
-			log(`[config-manager] Saved config ${this.path}`);
+			log(`Saved config ${this.path}`);
 			log(2)(config);
 		}
 
 		catch(err){
-			log.error('[config-manager] Failed to save config', err);
+			log.error('Failed to save config', err);
 		}
 	}
 
